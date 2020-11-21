@@ -72,16 +72,10 @@
       {{if(@this.publish && @this.inList)}}
     <article class="Article">
       <h3 class="Article__Title">
-            {{@this.iconHTML}}
         <a href="{{@this.url}}">
               {{@this.title}}
             </a>
           </h3>
-      {{if(@this.descriptionHTML)}}
-      <p class="Article__Desc">
-          {{@this.descriptionHTML}}
-      </p>
-      {{/if}}
       <div class="DateTagBar">
           {{if(@this.date)}}
         <span class="DateTagBar__Item DateTagBar__Date">Posted on {{@this.dateString}}</span>

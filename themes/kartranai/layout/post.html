@@ -63,6 +63,9 @@
     <div class="Header__Icon">{{post.iconHTML}}</div>
     {{/if}}
     <h1 class="Header__Title">{{post.title}}</h1>
+      <p class="Article__Desc">
+          {{post.descriptionHTML}}
+      </p>
         {{if(options.post.date || options.post.tags.length)}}
     <div class="DateTagBar">
           {{if(options.post.date)}}
