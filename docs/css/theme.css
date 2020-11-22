@@ -179,7 +179,7 @@ pre.Code {
 
 pre.Code code {
   background-color: rgb(247, 246, 243);
-  color: rgb(55, 53, 47);
+  color: var(--color-text-purple);
   font-size: 0.9em;
   line-height: 1.4;
   padding: 0;
