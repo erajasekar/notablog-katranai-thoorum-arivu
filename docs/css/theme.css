@@ -811,7 +811,7 @@ pre.Code code {
 
 .Quote {
   background: var(--color-bg-gray-light);
-  border-left: 5px solid currentcolor;
+  border-left: 5px solid #42b983;
   border-radius: 5px;
   margin: 0.5rem 0;
   padding: 0.5em 0.9em;
