@@ -14,6 +14,9 @@
   <meta name="description" content="{{post.descriptionPlain}}">
   <meta property="og:description" content="{{post.descriptionPlain}}">
   {{/if}}
+  {{if(options.post.cover)}}
+  <meta property="og:image" content="{{post.cover}}">
+  {{/if}}
   <meta property="og:type" content="blog">
   <title>{{post.title}}</title>
   <!-- Favicon -->
