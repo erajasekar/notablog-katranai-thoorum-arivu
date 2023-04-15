@@ -9,15 +9,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
-  <meta property="og:title" content="அழுக்காறாமை - பொறாமை குணத்தை நீக்குவது எப்படி ? | How to Stop Envying Others?">
-    <meta name="description" content="உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் புகழ் - குறள்கள் 161 - 170 | Learn Thirukkural for Extraordinary Life - Adhigaram Alukkaramai">
-  <meta property="og:description" content="உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் புகழ் - குறள்கள் 161 - 170 | Learn Thirukkural for Extraordinary Life - Adhigaram Alukkaramai">
-      <meta property="og:image" content="https://katranaithoorumarivu.com/img/website-cover.png">
-    <meta property="og:type" content="blog">
-  <title>அழுக்காறாமை - பொறாமை குணத்தை நீக்குவது எப்படி ? | How to Stop Envying Others?</title>
+  <meta property="og:title" content="{{post.title}}">
+  {{if(options.post.description.length > 0)}}
+  <meta name="description" content="{{post.descriptionPlain}}">
+  <meta property="og:description" content="{{post.descriptionPlain}}">
+  {{/if}}
+  {{if(options.post.cover)}}
+  <meta property="og:image" content="{{post.cover}}">
+  {{/if}}
+  <meta property="og:type" content="blog">
+  <title>{{post.title}}</title>
   <!-- Favicon -->
-    <link rel="shortcut icon" href="https://katranaithoorumarivu.com/img/website-logo.png">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+  {{if(options.siteMeta.icon)}}
+  <link rel="shortcut icon" href="{{siteMeta.icon}}">
+  {{/if}}
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
@@ -46,100 +52,48 @@
 <body>
   <nav class="Navbar">
     <a href="index.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Home</span></div>
+      <div class="Navbar__Btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
-                                                    <span class="Navbar__Delim">&centerdot;</span>
-    <a href="thirukkural-stories.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Thirukkural Stories</span></div>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
+    <span class="Navbar__Delim">&centerdot;</span>
+    <a href="{{@this.url}}">
+      <div class="Navbar__Btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="about.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/kavitha-profile.png"></span> <span>About</span></div>
-    </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="single-thirukkural-explanations.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fed1bd244-a6cc-46d6-a964-1fcc6b2df217%2FKatranai_Thoorum_Logo_(3).png?table=block&id=e233a18e-871a-4c93-81a3-93a56814209f"></span> <span>Single Kurals</span></div>
-    </a>
-                                                                                                                                                                  </nav>
+    {{/if}}
+    {{/each}}
+  </nav>
   <header class="Header">
-          <div class="Header__Cover">
-        <img src="https://katranaithoorumarivu.com/img/website-cover.png">
+      {{if(options.post.cover)}}
+    <div class="Header__Cover">
+        <img src="{{post.cover}}">
       </div>
-          <div class="Header__Spacer ">
+      {{/if}}
+    <div class="Header__Spacer {{if(!options.post.cover)}}Header__Spacer--NoCover{{/if}}">
     </div>
-        <div class="Header__Icon"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span></div>
-        <h1 class="Header__Title">அழுக்காறாமை - பொறாமை குணத்தை நீக்குவது எப்படி ? | How to Stop Envying Others?</h1>
+    {{if(options.post.icon)}}
+    <div class="Header__Icon">{{post.iconHTML}}</div>
+    {{/if}}
+    <h1 class="Header__Title">{{post.title}}</h1>
       <p class="Article__Desc">
-          <span class="SemanticStringArray"><span class="SemanticString">உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் புகழ் - குறள்கள் 161 - 170 | Learn Thirukkural for Extraordinary Life - Adhigaram Alukkaramai</span></span>      </p>
-            <div class="DateTagBar">
-                <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Aug 7, 2020</span>
-                          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
+          {{post.descriptionHTML}}
+      </p>
+        {{if(options.post.date || options.post.tags.length)}}
+    <div class="DateTagBar">
+          {{if(options.post.date)}}
+      <span class="DateTagBar__Item DateTagBar__Date">Posted on {{post.dateString}}</span>
+          {{/if}}
+          {{each(options.post.tags)}}
+      <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--{{@this.color}}">
+            <a href="tag/{{@this.value}}.html">{{@this.value}}</a>
           </span>
-                <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-          </header>
-      <article id="https://www.notion.so/1c38d193ccb0409ebb266244286f3cd0" class="PageRoot"><div id="https://www.notion.so/fdd03f7406c94548952f18eaef249b68" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">இந்த காணொளியில் உள்ள தகவல்கள்</span></span></p></div><div id="https://www.notion.so/d2aea1c47ccb41dd8aeb02b6da58ca8a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><blockquote id="https://www.notion.so/3ac346b432074d868a4467f5075c89e4" class="ColorfulBlock ColorfulBlock--ColorDefault Quote"><span class="SemanticStringArray"><span class="SemanticString">பொறாமை குணம் எவ்வளவு கொடிய தீமைகளை தரும் ?
-
-பொறாமை குணம் இருக்கின்றதா என்று எப்படி தெரிந்து கொள்வது ?
-
-பொறாமை குணத்தை நீக்குவது எப்படி ? </span></span></blockquote><div id="https://www.notion.so/1327b3025352425ba89bd21e5075277b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/1a1bcc1471a54bc995ef5c7e0f5390b6" class="Embed"><div class="Embed__Content"><div class="Embed__ResponsiveContainer" style="width:854px;padding-bottom:56.20608899297424%"><iframe src="https://www.youtube.com/embed/9ly-EsIk4Jc?feature=oembed" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen=""></iframe></div></div><p class="Embed__Caption"><span class="SemanticStringArray"><span class="SemanticString">அறத்துப்பால் - அழுக்காறாமை | Arathupal - Alukkaramai</span></span></p></div><div id="https://www.notion.so/905199da74884e5d8dd1fdefaaff7655" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/ef6ab625f2af40e4908012a6bfb316cb" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 161</strong></em></span></span></p></div><pre id="https://www.notion.so/4f600d5cf7ff440db24bf497d10b7d1b" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>ஒழுக்காறாக் கொள்க ஒருவன்தன் நெஞ்சத்
-தழுக்கா றிலாத இயல்பு		
-
-Ozhukkaaraak Kolka  Oruvandhan  Nenjaththu
-Azhukkaaru  Ilaadha  Iyalpu 		
-</span></span></span></code></pre><div id="https://www.notion.so/b83521bda10a4f0286578743a9168221" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 162</strong></em></span></span></p></div><pre id="https://www.notion.so/e1d95cc7647d40e69bafdd657c31ff06" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>விழுப்பேற்றின் அஃதொப்ப தில்லையார் மாட்டும்
-அழுக்காற்றின் அன்மை பெறின்		
-
-Vizhuppetrin Aqdhoppadhu  Illaiyaar  Maattum
-Azhukkaatrin  Anmai  Perin 		
-</span></span></span></code></pre><div id="https://www.notion.so/842938c8cef549af9d44f0034fe7f65e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 163</strong></em></span></span></p></div><pre id="https://www.notion.so/3c4b3af7c0b34777b3050eac2f4ac0c0" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அறனாக்கம் வேண்டாதான் என்பான் பிறனாக்கம்
-பேணா தழுக்கறுப் பான்		
-
-Aranaakkam Ventaadhaan  Enpaan  Piranaakkam
-Penaadhu  Azhukkarup  Paan 		
-</span></span></span></code></pre><div id="https://www.notion.so/b0ab20deef9845c8a69323af7e4ca7f6" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 164</strong></em></span></span></p></div><pre id="https://www.notion.so/6d23f4c63d4a49699fcf770910edee6e" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அழுக்காற்றின் அல்லவை செய்யார் இழுக்காற்றின்
-ஏதம் படுபாக் கறிந்து		
-
-Azhukkaatrin Allavai  Seyyaar  Izhukkaatrin
-Edham  Patupaakku  Arindhu 		
-</span></span></span></code></pre><div id="https://www.notion.so/9f59354592934b68b904b753b24e647f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 165</strong></em></span></span></p></div><pre id="https://www.notion.so/bc0ce883c8d54b33b664ccb16efe15de" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அழுக்கா றுடையார்க் கதுசாலும் ஒன்னார்
-வழுக்கியுங் கேடீன் பது		
-
-Azhukkaaru Utaiyaarkku  Adhusaalum  Onnaar
-Vazhukka�yum  Keteen  Padhu 		
-</span></span></span></code></pre><div id="https://www.notion.so/aa6fa58c9ab548999fedb0df109c9b2d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 166</strong></em></span></span></p></div><pre id="https://www.notion.so/b47d496ed6724ec3aa9e8aa6c5e3b492" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>கொடுப்ப தழுக்கறுப்பான் சுற்றம் உடுப்பதூஉம்
-உண்பதூஉ மின்றிக் கெடும்		
-
-Kotuppadhu Azhukkaruppaan  Sutram  Utuppadhooum
-Unpadhooum  Indrik  Ketum 		
-</span></span></span></code></pre><div id="https://www.notion.so/be209b36192c443880bef4272ee69920" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 167</strong></em></span></span></p></div><pre id="https://www.notion.so/d0ff3212ac8142f29b3f1f56b7a51509" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அவ்வித் தழுக்கா றுடையானைச் செய்யவள்
-தவ்வையைக் காட்டி விடும்		
-
-Avviththu Azhukkaaru  Utaiyaanaich  Cheyyaval
-Thavvaiyaik  Kaatti  Vitum 		
-</span></span></span></code></pre><div id="https://www.notion.so/527099b7b528477ab708d1bce55f4406" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 168</strong></em></span></span></p></div><pre id="https://www.notion.so/0e37d6171988472f930acf1ec4248830" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அழுக்கா றெனவொரு பாவி திருச்செற்றுத்
-தீயுழி உய்த்து விடும்		
-
-Azhukkaaru Enaoru  Paavi  Thiruchchetruth
-Theeyuzhi  Uyththu  Vitum 		
-</span></span></span></code></pre><div id="https://www.notion.so/0e02ce2c8ffb472eb801d35ff5bfbd50" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 169</strong></em></span></span></p></div><pre id="https://www.notion.so/4e636cccdf9d49a3b9c3da6e7ef8dbf7" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அவ்விய நெஞ்சத்தான் ஆக்கமும் செவ்வியான்
-கேடும் நினைக்கப் படும்		
-
-Avviya Nenjaththaan  Aakkamum  Sevviyaan
-Ketum  Ninaikkap  Patum 		
-</span></span></span></code></pre><div id="https://www.notion.so/c9d289a9ca3d49f089dc97c143407d9c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 170</strong></em></span></span></p></div><pre id="https://www.notion.so/62e4338213d54c1982cd2f4e842b8c70" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அழுக்கற் றகன்றாரும் இல்லையஃ தில்லார்
-பெருக்கத்தில் தீர்ந்தாரு மில்		
-
-Azhukkatru Akandraarum  Illai  Aqdhuillaar
-Perukkaththil  Theerndhaarum  Il 		
-</span></span></span></code></pre></article>  <footer class="Footer">
-        <div>&copy; கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu 2019</div>
+          {{/each}}
+        </div>
+        {{/if}}
+  </header>
+      {{post.contentHTML}}
+  <footer class="Footer">
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.

@@ -9,15 +9,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
-  <meta property="og:title" content="இல்வாழ்க்கை - அதிகாரம் எளிய விளக்கம் | Ilvaazhkkai - Adhigaram Simple Explanation">
-    <meta name="description" content="உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் இல்வாழ்க்கை - குறள்கள் 41 - 50 | Meaning for Adhigaram Ilvaazhkkai - Learn Thirukkural for Extraordinary Life">
-  <meta property="og:description" content="உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் இல்வாழ்க்கை - குறள்கள் 41 - 50 | Meaning for Adhigaram Ilvaazhkkai - Learn Thirukkural for Extraordinary Life">
-      <meta property="og:image" content="https://katranaithoorumarivu.com/img/website-cover.png">
-    <meta property="og:type" content="blog">
-  <title>இல்வாழ்க்கை - அதிகாரம் எளிய விளக்கம் | Ilvaazhkkai - Adhigaram Simple Explanation</title>
+  <meta property="og:title" content="{{post.title}}">
+  {{if(options.post.description.length > 0)}}
+  <meta name="description" content="{{post.descriptionPlain}}">
+  <meta property="og:description" content="{{post.descriptionPlain}}">
+  {{/if}}
+  {{if(options.post.cover)}}
+  <meta property="og:image" content="{{post.cover}}">
+  {{/if}}
+  <meta property="og:type" content="blog">
+  <title>{{post.title}}</title>
   <!-- Favicon -->
-    <link rel="shortcut icon" href="https://katranaithoorumarivu.com/img/website-logo.png">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+  {{if(options.siteMeta.icon)}}
+  <link rel="shortcut icon" href="{{siteMeta.icon}}">
+  {{/if}}
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
@@ -46,100 +52,48 @@
 <body>
   <nav class="Navbar">
     <a href="index.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Home</span></div>
+      <div class="Navbar__Btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
-                                                    <span class="Navbar__Delim">&centerdot;</span>
-    <a href="thirukkural-stories.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Thirukkural Stories</span></div>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
+    <span class="Navbar__Delim">&centerdot;</span>
+    <a href="{{@this.url}}">
+      <div class="Navbar__Btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="about.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/kavitha-profile.png"></span> <span>About</span></div>
-    </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="single-thirukkural-explanations.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fed1bd244-a6cc-46d6-a964-1fcc6b2df217%2FKatranai_Thoorum_Logo_(3).png?table=block&id=e233a18e-871a-4c93-81a3-93a56814209f"></span> <span>Single Kurals</span></div>
-    </a>
-                                                                                                                                                                  </nav>
+    {{/if}}
+    {{/each}}
+  </nav>
   <header class="Header">
-          <div class="Header__Cover">
-        <img src="https://katranaithoorumarivu.com/img/website-cover.png">
+      {{if(options.post.cover)}}
+    <div class="Header__Cover">
+        <img src="{{post.cover}}">
       </div>
-          <div class="Header__Spacer ">
+      {{/if}}
+    <div class="Header__Spacer {{if(!options.post.cover)}}Header__Spacer--NoCover{{/if}}">
     </div>
-        <div class="Header__Icon"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span></div>
-        <h1 class="Header__Title">இல்வாழ்க்கை - அதிகாரம் எளிய விளக்கம் | Ilvaazhkkai - Adhigaram Simple Explanation</h1>
+    {{if(options.post.icon)}}
+    <div class="Header__Icon">{{post.iconHTML}}</div>
+    {{/if}}
+    <h1 class="Header__Title">{{post.title}}</h1>
       <p class="Article__Desc">
-          <span class="SemanticStringArray"><span class="SemanticString">உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் இல்வாழ்க்கை - குறள்கள் 41 - 50 | Meaning for Adhigaram Ilvaazhkkai - Learn Thirukkural for Extraordinary Life</span></span>      </p>
-            <div class="DateTagBar">
-                <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Jun 5, 2020</span>
-                          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
+          {{post.descriptionHTML}}
+      </p>
+        {{if(options.post.date || options.post.tags.length)}}
+    <div class="DateTagBar">
+          {{if(options.post.date)}}
+      <span class="DateTagBar__Item DateTagBar__Date">Posted on {{post.dateString}}</span>
+          {{/if}}
+          {{each(options.post.tags)}}
+      <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--{{@this.color}}">
+            <a href="tag/{{@this.value}}.html">{{@this.value}}</a>
           </span>
-                <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-          </header>
-      <article id="https://www.notion.so/e4f2ade805b74544950693e7c846d2d2" class="PageRoot"><div id="https://www.notion.so/0dafc74d94e6405b9df6a02ef08dcb9d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">இந்த காணொளியில் உள்ள தகவல்கள்</span></span></p></div><blockquote id="https://www.notion.so/3027484b07164638b3f9b1bdc433e124" class="ColorfulBlock ColorfulBlock--ColorDefault Quote"><span class="SemanticStringArray"><span class="SemanticString">இல்லறத்தில் வாழ்பவரின் பெருமை என்ன ?
-
-இனிய இல்லறமாக இருக்க எப்படி வாழ வேண்டும் ?
-
-ஏன் இல்லறம் துறவறத்தை விட சிறந்தது ?</span></span></blockquote><div id="https://www.notion.so/f7e1bac022324a5f91ab6acd834cd95e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/7aa0903e36d9438d813cd356644269b7" class="Embed"><div class="Embed__Content"><div class="Embed__ResponsiveContainer" style="width:854px;padding-bottom:56.20608899297424%"><iframe src="https://www.youtube.com/embed/jSZ47aUtb20?feature=oembed" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen=""></iframe></div></div><p class="Embed__Caption"><span class="SemanticStringArray"><span class="SemanticString">அறத்துப்பால் - இல்வாழ்க்கை | Arathupal - Ilvaazhkkai</span></span></p></div><div id="https://www.notion.so/7f0ffd8eddb84e158053b81c99eb5b44" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 41</strong></em></span></span></p></div><pre id="https://www.notion.so/b7b7bec6fe1e49f7843df39b871e004b" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>இல்வாழ்வான் என்பான் இயல்புடைய மூவர்க்கும்
-நல்லாற்றின் நின்ற துணை		
-
-Ilvaazhvaan Enpaan  Iyalputaiya  Moovarkkum
-Nallaatrin  Nindra  Thunai 		
-</span></span></span></code></pre><div id="https://www.notion.so/efdd09e8bf034d83afe24b480fd1ac6e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 42</strong></em></span></span></p></div><pre id="https://www.notion.so/7ed8a6986ab74ffc9f61890b8cadd642" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>துறந்தார்க்கும் துவ்வா தவர்க்கும் இறந்தார்க்கும்
-இல்வாழ்வான் என்பான் துணை		
-
-Thurandhaarkkum Thuvvaa  Dhavarkkum  Irandhaarkkum
-Ilvaazhvaan  Enpaan  Thunai 		
-</span></span></span></code></pre><div id="https://www.notion.so/02fde89c5d55416f92a3a2c7fcfb51f9" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 43</strong></em></span></span></p></div><pre id="https://www.notion.so/9cbf1efc69214d2081ec4e0d1cf531fd" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>தென்புலத்தார் தெய்வம் விருந்தொக்கல் தானென்றாங்கு
-ஐம்புலத்தா றோம்பல் தலை		
-
-Thenpulaththaar Theyvam  Virundhokkal  Thaanendraangu
-Aimpulaththaaru  Ompal  Thalai 		
-</span></span></span></code></pre><div id="https://www.notion.so/27396de1dfe84f6e826c0b1c5aef5365" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 44</strong></em></span></span></p></div><pre id="https://www.notion.so/abf4e4d10e414ecd97b4375b3670b395" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>பழியஞ்சிப் பாத்தூண் உடைத்தாயின் வாழ்க்கை
-வழியெஞ்சல் எஞ்ஞான்றும் இல		
-
-Pazhiyanjip Paaththoon  Utaiththaayin  Vaazhkkai
-Vazhiyenjal  Egngnaandrum  Il 		
-</span></span></span></code></pre><div id="https://www.notion.so/eec59156af324b979a14fea0454e871b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 45</strong></em></span></span></p></div><pre id="https://www.notion.so/c6fea4e724dd4459959a04cf0ddc359f" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அன்பும் அறனும் உடைத்தாயின் இல்வாழ்க்கை
-பண்பும் பயனும் அது		
-
-Anpum Aranum  Utaiththaayin  Ilvaazhkkai
-Panpum  Payanum  Adhu 		
-</span></span></span></code></pre><div id="https://www.notion.so/7e1501940b4c4875babb9e8c99b2cb01" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 46</strong></em></span></span></p></div><pre id="https://www.notion.so/f59d938967854790b68290da2304fb6c" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அறத்தாற்றின் இல்வாழ்க்கை ஆற்றின் புறத்தாற்றில்
-போஒய்ப் பெறுவ தெவன்		
-
-Araththaatrin Ilvaazhkkai  Aatrin  Puraththaatril
-Pooip  Peruva  Thevan? 		
-</span></span></span></code></pre><div id="https://www.notion.so/67662109676d4a42851afb70eae71651" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 47</strong></em></span></span></p></div><pre id="https://www.notion.so/64e21beec1304025b84f62e150eeec1e" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>இயல்பினான் இல்வாழ்க்கை வாழ்பவன் என்பான்
-முயல்வாருள் எல்லாம் தலை		
-
-Iyalpinaan Ilvaazhkkai  Vaazhpavan  Enpaan
-Muyalvaarul  Ellaam  Thalai 		
-</span></span></span></code></pre><div id="https://www.notion.so/e4186c1c58434a048036d6d76a4ac970" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 48</strong></em></span></span></p></div><pre id="https://www.notion.so/567ddf65ba504f198b9481744521ab11" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>ஆற்றின் ஒழுக்கி அறனிழுக்கா இல்வாழ்க்கை
-நோற்பாரின் நோன்மை உடைத்து		
-
-Aatrin Ozhukki  Aranizhukkaa  Ilvaazhkkai
-Norpaarin  Nonmai  Utaiththu 		
-</span></span></span></code></pre><div id="https://www.notion.so/d720a01a6ede47d383937b1f028b755e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 49</strong></em></span></span></p></div><pre id="https://www.notion.so/23185a0613cc41e0aff9aa1b326300c6" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அறன்எனப் பட்டதே இல்வாழ்க்கை அஃதும்
-பிறன்பழிப்ப தில்லாயின் நன்று		
-
-Aran Enap  Pattadhe  Ilvaazhkkai  Aqdhum
-Piranpazhippa  Thillaayin  Nandru 		
-</span></span></span></code></pre><div id="https://www.notion.so/a2a2140fbacd4f89b4e9ffa160a39c2f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 50</strong></em></span></span></p></div><pre id="https://www.notion.so/35c9b081042844eeb702144fd2987f26" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>வையத்துள் வாழ்வாங்கு வாழ்பவன் வான்உறையும்
-தெய்வத்துள் வைக்கப் படும்		
-
-Vaiyaththul Vaazhvaangu  Vaazhpavan  Vaanu�ryum
-Theyvaththul  Vaikkap  Patum 		
-</span></span></span></code></pre></article>  <footer class="Footer">
-        <div>&copy; கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu 2019</div>
+          {{/each}}
+        </div>
+        {{/if}}
+  </header>
+      {{post.contentHTML}}
+  <footer class="Footer">
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.

@@ -9,15 +9,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
-  <meta property="og:title" content="Thirukkural Stories">
-    <meta name="description" content="திருக்குறள் கதைகள் | Thirukkural Kathaigal - கதை வழி திருக்குறள் | Learn Thirukkural through stories">
-  <meta property="og:description" content="திருக்குறள் கதைகள் | Thirukkural Kathaigal - கதை வழி திருக்குறள் | Learn Thirukkural through stories">
-      <meta property="og:image" content="https://katranaithoorumarivu.com/img/website-cover.png">
-    <meta property="og:type" content="blog">
-  <title>Thirukkural Stories</title>
+  <meta property="og:title" content="{{post.title}}">
+  {{if(options.post.description.length > 0)}}
+  <meta name="description" content="{{post.descriptionPlain}}">
+  <meta property="og:description" content="{{post.descriptionPlain}}">
+  {{/if}}
+  {{if(options.post.cover)}}
+  <meta property="og:image" content="{{post.cover}}">
+  {{/if}}
+  <meta property="og:type" content="blog">
+  <title>{{post.title}}</title>
   <!-- Favicon -->
-    <link rel="shortcut icon" href="https://katranaithoorumarivu.com/img/website-logo.png">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+  {{if(options.siteMeta.icon)}}
+  <link rel="shortcut icon" href="{{siteMeta.icon}}">
+  {{/if}}
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
@@ -46,57 +52,48 @@
 <body>
   <nav class="Navbar">
     <a href="index.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Home</span></div>
+      <div class="Navbar__Btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
-                                                    <span class="Navbar__Delim">&centerdot;</span>
-    <a href="thirukkural-stories.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Thirukkural Stories</span></div>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
+    <span class="Navbar__Delim">&centerdot;</span>
+    <a href="{{@this.url}}">
+      <div class="Navbar__Btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="about.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/kavitha-profile.png"></span> <span>About</span></div>
-    </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="single-thirukkural-explanations.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fed1bd244-a6cc-46d6-a964-1fcc6b2df217%2FKatranai_Thoorum_Logo_(3).png?table=block&id=e233a18e-871a-4c93-81a3-93a56814209f"></span> <span>Single Kurals</span></div>
-    </a>
-                                                                                                                                                                  </nav>
+    {{/if}}
+    {{/each}}
+  </nav>
   <header class="Header">
-          <div class="Header__Cover">
-        <img src="https://katranaithoorumarivu.com/img/website-cover.png">
+      {{if(options.post.cover)}}
+    <div class="Header__Cover">
+        <img src="{{post.cover}}">
       </div>
-          <div class="Header__Spacer ">
+      {{/if}}
+    <div class="Header__Spacer {{if(!options.post.cover)}}Header__Spacer--NoCover{{/if}}">
     </div>
-        <div class="Header__Icon"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span></div>
-        <h1 class="Header__Title">Thirukkural Stories</h1>
+    {{if(options.post.icon)}}
+    <div class="Header__Icon">{{post.iconHTML}}</div>
+    {{/if}}
+    <h1 class="Header__Title">{{post.title}}</h1>
       <p class="Article__Desc">
-          <span class="SemanticStringArray"><span class="SemanticString">திருக்குறள் கதைகள் | Thirukkural Kathaigal - கதை வழி திருக்குறள் | Learn Thirukkural through stories</span></span>      </p>
-            <div class="DateTagBar">
-                <span class="DateTagBar__Item DateTagBar__Date">Posted on Sun, Nov 29, 2020</span>
-                          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
+          {{post.descriptionHTML}}
+      </p>
+        {{if(options.post.date || options.post.tags.length)}}
+    <div class="DateTagBar">
+          {{if(options.post.date)}}
+      <span class="DateTagBar__Item DateTagBar__Date">Posted on {{post.dateString}}</span>
+          {{/if}}
+          {{each(options.post.tags)}}
+      <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--{{@this.color}}">
+            <a href="tag/{{@this.value}}.html">{{@this.value}}</a>
           </span>
-                <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--default">
-            <a href="tag/story.html">story</a>
-          </span>
-                  </div>
-          </header>
-      <article id="https://www.notion.so/e4b96bff997143538fe96ee9f8f1a7d8" class="PageRoot"><ul id="https://www.notion.so/85bb87b2705740668ada70e7f49db7a1" class="ColorfulBlock ColorfulBlock--BgYellow TableOfContents"><li class="TableOfContents__Item"><a href="#https://www.notion.so/9f45e464dd9d4b259d5cf00a6b844078"><div style="margin-left:0px"><span class="SemanticStringArray"><span class="SemanticString">உண்மையால் விளையும் நன்மை - Benefit of truth</span></span></div></a></li><li class="TableOfContents__Item"><a href="#https://www.notion.so/50c76c7322444e7e8cbf8a2a06d6c7fc"><div style="margin-left:0px"><span class="SemanticStringArray"><span class="SemanticString">நாவினால் சுட்ட வடு - Why you should not hurt others?</span></span></div></a></li><li class="TableOfContents__Item"><a href="#https://www.notion.so/f523bd6a5fc841a2976b86c29eaf1d68"><div style="margin-left:0px"><span class="SemanticStringArray"><span class="SemanticString">இன்னா செய்தாரை ஒறுத்தல் - How to punish someone who did bad things to you?</span></span></div></a></li></ul><h2 id="https://www.notion.so/9f45e464dd9d4b259d5cf00a6b844078" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/9f45e464dd9d4b259d5cf00a6b844078"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">உண்மையால் விளையும் நன்மை - Benefit of truth</span></span></h2><div id="https://www.notion.so/a1051c5a73e2460094eecf5812bdded6" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/b640e4e5e2f14120aacf8c189d076121" class="Embed"><div class="Embed__Content"><div class="Embed__ResponsiveContainer" style="width:854px;padding-bottom:56.20608899297424%"><iframe src="https://www.youtube.com/embed/WBapR2ZW_r4?feature=oembed" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen=""></iframe></div></div><p class="Embed__Caption"><span class="SemanticStringArray"><span class="SemanticString">Vaaimai - Poiyaamai Anna  Pukazhillai</span></span></p></div><div id="https://www.notion.so/0e2f8aed20e240248ef87e3c6243c87c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் / Kural : 296</strong></em></span><span class="SemanticString">
-</span></span></p></div><pre id="https://www.notion.so/c2cdb9556c1a49a6a2b7cc4d6384c75b" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>பொய்யாமை யன்ன புகழில்லை எய்யாமை
-எல்லா அறமுந் தரும்
-
-Poiyaamai Anna  Pukazhillai  Eyyaamai
-Ellaa  Aramun  Tharum</span></span></span></code></pre><div id="https://www.notion.so/ce9b21427b2c41e889a7c6770d5e948c" class="Divider"></div><div id="https://www.notion.so/2aac212b01624c06834a4e13388efc2a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><h2 id="https://www.notion.so/50c76c7322444e7e8cbf8a2a06d6c7fc" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/50c76c7322444e7e8cbf8a2a06d6c7fc"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">நாவினால் சுட்ட வடு - Why you should not hurt others?</span></span></h2><div id="https://www.notion.so/52817ecfa0864daca2805a338f35fbc7" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/de1cd438c23f41f0ac296a20fefd537d" class="Embed"><div class="Embed__Content"><div class="Embed__ResponsiveContainer" style="width:854px;padding-bottom:56.20608899297424%"><iframe src="https://www.youtube.com/embed/x6h5vNvEl0A?list=PLGAtC4XBOaCRLnsI1JNYUgEyjDTv4F6A2" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen=""></iframe></div></div><p class="Embed__Caption"><span class="SemanticStringArray"><span class="SemanticString">Adakkam Udaimai - Theeyinaar Suttapun  Ullaarum</span></span></p></div><div id="https://www.notion.so/98377068196c4441a74de95a62542e2c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/1313b71f240a489789b191e47c58caf4" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள்  / Kural: 129
-</strong></em></span></span></p></div><pre id="https://www.notion.so/054eeeac2ec34288a460feed3ce1a218" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>தீயினாற் சுட்டபுண் உள்ளாறும் ஆறாதே
-நாவினாற் சுட்ட வடு  
-
-Theeyinaar Suttapun  Ullaarum  Aaraadhe
-Naavinaar  Sutta  Vatu</span></span></span></code></pre><div id="https://www.notion.so/429a5dec263a4b558b4ef550b5174364" class="Divider"></div><h2 id="https://www.notion.so/f523bd6a5fc841a2976b86c29eaf1d68" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/f523bd6a5fc841a2976b86c29eaf1d68"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">இன்னா செய்தாரை ஒறுத்தல் - How to punish someone who did bad things to you?</span></span></h2><div id="https://www.notion.so/951b7787555e4e0db5b7c4d7b4f5991b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/2d5bab87539d47c3a1f3a14c4cac0dd1" class="Embed"><div class="Embed__Content"><div class="Embed__ResponsiveContainer" style="width:854px;padding-bottom:56.20608899297424%"><iframe src="https://www.youtube.com/embed/ZBRZkm63ddg?list=PLGAtC4XBOaCRLnsI1JNYUgEyjDTv4F6A2" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen=""></iframe></div></div><p class="Embed__Caption"><span class="SemanticStringArray"><span class="SemanticString">Inna Seiyaamai - Innaasey Thaarai  Oruththal</span></span></p></div><div id="https://www.notion.so/448556541cf548a3a2cfcd636508dc2a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் / Kural : 314</strong></em></span></span></p></div><div id="https://www.notion.so/1fed3f792b5a49929118ddab4b938945" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><pre id="https://www.notion.so/de522fb505394aeabfba1b50e7a862c6" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>இன்னாசெய் தாரை ஒறுத்தல் அவர்நாண
-நன்னயஞ் செய்து விடல்        
-
-Innaasey Thaarai  Oruththal  Avarnaana
-Nannayanj  Cheydhu  Vita</span></span></span></code></pre><div id="https://www.notion.so/e2329ec07c7e4e1bbea55344e12465f9" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>  <footer class="Footer">
-        <div>&copy; கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu 2019</div>
+          {{/each}}
+        </div>
+        {{/if}}
+  </header>
+      {{post.contentHTML}}
+  <footer class="Footer">
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.

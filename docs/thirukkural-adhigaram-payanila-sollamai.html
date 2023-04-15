@@ -9,15 +9,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
-  <meta property="og:title" content="பயனில சொல்லாமை - பயனுள்ளதையே பேச வேண்டும் | Speak only what is useful">
-    <meta name="description" content="உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் பயனில சொல்லாமை - குறள்கள் 191 - 200 | Learn Thirukkural for Extraordinary Life - Adhigaram Payanila Sollamai">
-  <meta property="og:description" content="உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் பயனில சொல்லாமை - குறள்கள் 191 - 200 | Learn Thirukkural for Extraordinary Life - Adhigaram Payanila Sollamai">
-      <meta property="og:image" content="https://katranaithoorumarivu.com/img/website-cover.png">
-    <meta property="og:type" content="blog">
-  <title>பயனில சொல்லாமை - பயனுள்ளதையே பேச வேண்டும் | Speak only what is useful</title>
+  <meta property="og:title" content="{{post.title}}">
+  {{if(options.post.description.length > 0)}}
+  <meta name="description" content="{{post.descriptionPlain}}">
+  <meta property="og:description" content="{{post.descriptionPlain}}">
+  {{/if}}
+  {{if(options.post.cover)}}
+  <meta property="og:image" content="{{post.cover}}">
+  {{/if}}
+  <meta property="og:type" content="blog">
+  <title>{{post.title}}</title>
   <!-- Favicon -->
-    <link rel="shortcut icon" href="https://katranaithoorumarivu.com/img/website-logo.png">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+  {{if(options.siteMeta.icon)}}
+  <link rel="shortcut icon" href="{{siteMeta.icon}}">
+  {{/if}}
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
@@ -46,102 +52,48 @@
 <body>
   <nav class="Navbar">
     <a href="index.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Home</span></div>
+      <div class="Navbar__Btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
-                                                    <span class="Navbar__Delim">&centerdot;</span>
-    <a href="thirukkural-stories.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Thirukkural Stories</span></div>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
+    <span class="Navbar__Delim">&centerdot;</span>
+    <a href="{{@this.url}}">
+      <div class="Navbar__Btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="about.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/kavitha-profile.png"></span> <span>About</span></div>
-    </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="single-thirukkural-explanations.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fed1bd244-a6cc-46d6-a964-1fcc6b2df217%2FKatranai_Thoorum_Logo_(3).png?table=block&id=e233a18e-871a-4c93-81a3-93a56814209f"></span> <span>Single Kurals</span></div>
-    </a>
-                                                                                                                                                                  </nav>
+    {{/if}}
+    {{/each}}
+  </nav>
   <header class="Header">
-          <div class="Header__Cover">
-        <img src="https://katranaithoorumarivu.com/img/website-cover.png">
+      {{if(options.post.cover)}}
+    <div class="Header__Cover">
+        <img src="{{post.cover}}">
       </div>
-          <div class="Header__Spacer ">
+      {{/if}}
+    <div class="Header__Spacer {{if(!options.post.cover)}}Header__Spacer--NoCover{{/if}}">
     </div>
-        <div class="Header__Icon"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span></div>
-        <h1 class="Header__Title">பயனில சொல்லாமை - பயனுள்ளதையே பேச வேண்டும் | Speak only what is useful</h1>
+    {{if(options.post.icon)}}
+    <div class="Header__Icon">{{post.iconHTML}}</div>
+    {{/if}}
+    <h1 class="Header__Title">{{post.title}}</h1>
       <p class="Article__Desc">
-          <span class="SemanticStringArray"><span class="SemanticString">உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் பயனில சொல்லாமை - குறள்கள் 191 - 200 | Learn Thirukkural for Extraordinary Life - Adhigaram Payanila Sollamai</span></span>      </p>
-            <div class="DateTagBar">
-                <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Aug 20, 2020</span>
-                          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
+          {{post.descriptionHTML}}
+      </p>
+        {{if(options.post.date || options.post.tags.length)}}
+    <div class="DateTagBar">
+          {{if(options.post.date)}}
+      <span class="DateTagBar__Item DateTagBar__Date">Posted on {{post.dateString}}</span>
+          {{/if}}
+          {{each(options.post.tags)}}
+      <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--{{@this.color}}">
+            <a href="tag/{{@this.value}}.html">{{@this.value}}</a>
           </span>
-                <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-          </header>
-      <article id="https://www.notion.so/ddc8d2d00e8b46c1b591b5924adcab0a" class="PageRoot"><div id="https://www.notion.so/8e7b3a07285341b0bf7f6e62b4a6078d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">இந்த காணொளியில் உள்ள தகவல்கள்
-</span></span></p></div><blockquote id="https://www.notion.so/8f99fc1da3b944a8938075cc66e47735" class="ColorfulBlock ColorfulBlock--ColorDefault Quote"><span class="SemanticStringArray"><span class="SemanticString">ஏன் பயனுள்ளவற்றையே பேச வேண்டும் ?
-
-பயனில்லாத வார்த்தைகளை பேசுவது எவ்வளவு தீமையானது ?
-
-பயனில்லாத விஷயங்களை எப்படி தவிர்ப்பது ?</span></span></blockquote><div id="https://www.notion.so/559383042723448a89bc8040ee9c34d4" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><div id="https://www.notion.so/008503877f8247a79cc4c9b7c7fa298d" class="Embed"><div class="Embed__Content"><div class="Embed__ResponsiveContainer" style="width:854px;padding-bottom:56.20608899297424%"><iframe src="https://www.youtube.com/embed/90w7PoH7Vus?feature=oembed" sandbox="allow-scripts allow-popups allow-forms allow-same-origin" allowfullscreen=""></iframe></div></div><p class="Embed__Caption"><span class="SemanticStringArray"><span class="SemanticString">அறத்துப்பால் - பயனில சொல்லாமை | Arathupal - Payanila Sollamai</span></span></p></div><div id="https://www.notion.so/73a3d4af14b34e48a3fc36ccde96938b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">
-</span><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 191</strong></em></span></span></p></div><pre id="https://www.notion.so/33b60f9e01b8477ab79dc2c0794c5949" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>பல்லார் முனியப் பயனில சொல்லுவான்
-எல்லாரும் எள்ளப் படும்		
-
-Pallaar Muniyap  Payanila  Solluvaan
-Ellaarum  Ellap  Patum 		
-</span></span></span></code></pre><div id="https://www.notion.so/ff80a688208541b1aff50a58c8ec37b5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 192</strong></em></span></span></p></div><pre id="https://www.notion.so/9265f33bc8e741069dc63125e906c899" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>பயனில பல்லார்முன் சொல்லல் நயனில
-நட்டார்கட் செய்தலிற் றீது		
-
-Payanila Pallaarmun  Sollal  Nayanila
-Nattaarkan  Seydhalir  Reedhu 		
-</span></span></span></code></pre><div id="https://www.notion.so/a67e4e3b3c0649b98e3f8a4b12c4b0da" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 193</strong></em></span></span></p></div><pre id="https://www.notion.so/29246388a0d64032a031752723c23965" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>நயனில னென்பது சொல்லும் பயனில
-பாரித் துரைக்கும் உரை		
-
-Nayanilan Enpadhu  Sollum  Payanila
-Paarith  Thuraikkum  Urai 		
-</span></span></span></code></pre><div id="https://www.notion.so/a28d72e5169142aaab5378314b7c97be" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 194</strong></em></span></span></p></div><pre id="https://www.notion.so/b29876997e4643e29c6b128e55e22e4c" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>நயன்சாரா நன்மையின் நீக்கும் பயன்சாராப்
-பண்பில்சொல் பல்லா ரகத்து		
-
-Nayansaaraa Nanmaiyin  Neekkum  Payansaaraap
-Panpilsol  Pallaa  Rakaththu 		
-</span></span></span></code></pre><div id="https://www.notion.so/402f0a1782de4ba79892e114656e63e8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 195</strong></em></span></span></p></div><pre id="https://www.notion.so/3e7c31df1ebf4be0b8a1e7abf2814e3a" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>சீர்மை சிறப்பொடு நீங்கும் பயனில
-நீர்மை யுடையார் சொலின்		
-
-Seermai Sirappotu  Neengum  Payanila
-Neermai  Yutaiyaar  Solin 		
-</span></span></span></code></pre><div id="https://www.notion.so/d44f308f6c204afc9687dee2cfa85624" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 196</strong></em></span></span></p></div><pre id="https://www.notion.so/b635f78833d54718b2a58eb03aba9b91" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>பயனில்சொல் பாராட்டு வானை மகனெனல்
-மக்கட் பதடி யெனல்		
-
-Payanil Sol  Paaraattu  Vaanai  Makanenal
-Makkat  Padhati  Yenal 		
-</span></span></span></code></pre><div id="https://www.notion.so/f327b58693d841e3ab28663c97df768d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 197</strong></em></span></span></p></div><pre id="https://www.notion.so/4764cf12f7a2402984feeaa7ce561736" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>நயனில சொல்லினுஞ் சொல்லுக சான்றோர்
-பயனில சொல்லாமை நன்று		
-
-Nayanila Sollinunj  Cholluka  Saandror
-Payanila  Sollaamai  Nandru 		
-</span></span></span></code></pre><div id="https://www.notion.so/529954d817834d92ad165c4d19e52c52" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 198</strong></em></span></span></p></div><pre id="https://www.notion.so/d67a729d744a44e4b32229770833cfbd" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>அரும்பய னாயும் அறிவினார் சொல்லார்
-பெரும்பய னில்லாத சொல்		
-
-Arumpayan Aayum  Arivinaar  Sollaar
-Perumpayan  Illaadha  Sol 		
-</span></span></span></code></pre><div id="https://www.notion.so/890cc71a9f8e41b9bc1c9d2a3041ee86" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 199</strong></em></span></span></p></div><pre id="https://www.notion.so/7a8546b684434e169e2dec019bb148ed" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>பொருள்தீர்ந்த பொச்சாந்துஞ் சொல்லார் மருள்தீர்ந்த
-மாசறு காட்சி யவர்		
-
-Poruldheerndha Pochchaandhunj  Chollaar  Maruldheerndha
-Maasaru  Kaatchi  Yavar 		
-</span></span></span></code></pre><div id="https://www.notion.so/3be542f3af954b14b18be52e48dc5e68" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><em class="SemanticString__Fragment SemanticString__Fragment--Italic"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">குறள் : 200</strong></em></span></span></p></div><pre id="https://www.notion.so/dfc2c5915dd04398a3cd09c0544b1bc5" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span>சொல்லுக சொல்லிற் பயனுடைய சொல்லற்க
-சொல்லிற் பயனிலாச் சொல்		
-
-Solluka Sollir  Payanutaiya  Sollarka
-Sollir  Payanilaach  Chol 		
-</span></span></span></code></pre></article>  <footer class="Footer">
-        <div>&copy; கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu 2019</div>
+          {{/each}}
+        </div>
+        {{/if}}
+  </header>
+      {{post.contentHTML}}
+  <footer class="Footer">
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.

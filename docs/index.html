@@ -9,15 +9,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
-  <meta property="og:title" content="கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu">
-    <meta name="description" content="வள்ளுவர் வழங்கிய வாழ்க்கை நெறிகள், எளிய விளக்கங்களுடன் | Learn Thirukkural for living a Extraordinary Life.">
-  <meta property="og:description" content="வள்ளுவர் வழங்கிய வாழ்க்கை நெறிகள், எளிய விளக்கங்களுடன் | Learn Thirukkural for living a Extraordinary Life.">
-      <meta property="og:image" content="https://katranaithoorumarivu.com/img/website-cover.png">
-    <meta property="og:type" content="blog">
-  <title>கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu</title>
+  <meta property="og:title" content="{{siteMeta.title}}">
+  {{if(options.siteMeta.description.length > 0)}}
+  <meta name="description" content="{{siteMeta.descriptionPlain}}">
+  <meta property="og:description" content="{{siteMeta.descriptionPlain}}">
+  {{/if}}
+  {{if(options.siteMeta.cover)}}
+  <meta property="og:image" content="{{siteMeta.cover}}">
+  {{/if}}
+  <meta property="og:type" content="blog">
+  <title>{{siteMeta.title}}</title>
   <!-- Favicon -->
-    <link rel="shortcut icon" href="https://katranaithoorumarivu.com/img/website-logo.png">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+  {{if(options.siteMeta.icon)}}
+  <link rel="shortcut icon" href="{{siteMeta.icon}}">
+  {{/if}}
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
@@ -42,451 +48,62 @@
 <body>
   <nav class="Navbar">
     <a href="index.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Home</span></div>
+      <div class="Navbar__Btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
-                                                    <span class="Navbar__Delim">&centerdot;</span>
-    <a href="thirukkural-stories.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Thirukkural Stories</span></div>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
+    <span class="Navbar__Delim">&centerdot;</span>
+    <a href="{{@this.url}}">
+      <div class="Navbar__Btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="about.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/kavitha-profile.png"></span> <span>About</span></div>
-    </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="single-thirukkural-explanations.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fed1bd244-a6cc-46d6-a964-1fcc6b2df217%2FKatranai_Thoorum_Logo_(3).png?table=block&id=e233a18e-871a-4c93-81a3-93a56814209f"></span> <span>Single Kurals</span></div>
-    </a>
-                                                                                                                                                                  </nav>
+    {{/if}}
+    {{/each}}
+  </nav>
   <header class="Header">
-        <div class="Header__Cover">
-      <img src="https://katranaithoorumarivu.com/img/website-cover.png">
+    {{if(options.siteMeta.cover)}}
+    <div class="Header__Cover">
+      <img src="{{siteMeta.cover}}">
     </div>
-        <div class="Header__Spacer ">
+    {{/if}}
+    <div class="Header__Spacer {{if(!options.siteMeta.cover)}}Header__Spacer--NoCover{{/if}}">
     </div>
-        <div class="Header__Icon"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span></div>
-        <h1 class="Header__Title">கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu</h1>
-        <div class="Header__Desc">
+    {{if(options.siteMeta.icon)}}
+    <div class="Header__Icon">{{siteMeta.iconHTML}}</div>
+    {{/if}}
+    <h1 class="Header__Title">{{siteMeta.title}}</h1>
+    {{if(options.siteMeta.description)}}
+    <div class="Header__Desc">
       <span class="Header__DescBigQuoteMark">&ldquo;</span>
-      <span class="SemanticStringArray"><span class="SemanticString"><mark class="SemanticString__Fragment SemanticString__Fragment--HighlightedColor SemanticString__Fragment--ColorPurple">வள்ளுவர் வழங்கிய வாழ்க்கை நெறிகள், எளிய விளக்கங்களுடன் | Learn Thirukkural for living a Extraordinary Life.</mark></span></span>      <span class="Header__DescBigQuoteMark">&bdquo;</span>
+      {{siteMeta.descriptionHTML}}
+      <span class="Header__DescBigQuoteMark">&bdquo;</span>
     </div>
-      </header>
+    {{/if}}
+  </header>
   <article class="ArticleList">
-                <article class="Article">
+      {{each(options.siteMeta.pages)}}
+      {{if(@this.publish && @this.inList)}}
+    <article class="Article">
       <h3 class="Article__Title">
-        <a href="thirukkural-story-arumai-udaithendru.html">
-              திருக்குறள் கதைகள் - ஏன் கடினமான காரியங்களை செய்ய வேண்டும் ?| Why should you do hard things in life?            </a>
+        <a href="{{@this.url}}">
+              {{@this.title}}
+            </a>
           </h3>
       <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Sat, Apr 17, 2021</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
+          {{if(@this.date)}}
+        <span class="DateTagBar__Item DateTagBar__Date">Posted on {{@this.dateString}}</span>
+          {{/if}}
+          {{each(@this.tags)}}
+        <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--{{@this.color}}">
+            <a href="tag/{{@this.value}}.html">{{@this.value}}</a>
           </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
+          {{/each}}
+        </div>
     </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-irai-maatchi.html">
-              இறைமாட்சி - ஒரு தலைவருக்கு இருக்க வேண்டிய பண்புகள் என்ன | What qualities a leader should have?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Apr 16, 2021</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--blue">
-            <a href="tag/announcement.html">announcement</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-inna seiyaamai.html">
-              திருக்குறள் - இன்னா செய்யாமை - ஏன் நாம் தீமை செய்ய கூடாது ? | Inna Seiyaamai - Why we should not do Evil?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Jan 28, 2021</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-vegulamai.html">
-              திருக்குறள் - வெகுளாமை - கோபத்தை கட்டு படுத்துவது எப்படி ? | Thirukkural - How to control Anger?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Dec 25, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-story-poiyaamai-anna.html">
-              கதை வழி திருக்குறள் - உண்மையால் விளையும் நன்மை | Thirukkural Stories for Kids - Benefit of truth            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Wed, Dec 2, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--default">
-            <a href="tag/story.html">story</a>
-          </span>
-                  </div>
-    </article>
-                                  <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-vaaimai.html">
-              வாய்மை - உண்மை பேசுபவர்கள் எவ்வளவு சிறந்தவர்கள்? | Thirukkural for Extraordinary Life            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Mon, Nov 23, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                                                          <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-pugal.html">
-              புகழ் - ஏன் புகழுடன் வாழ வேண்டும்? |  Why should we live with fame?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Nov 19, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-eegai.html">
-              ஈகை - கொடுப்பதால் என்ன நன்மைகள் ஏற்படும் ? | What are the benefits of Charity ?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Sep 24, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-theevinai-achcham.html">
-              தீவினையச்சம் - ஏன் தீமை செய்ய பயப்பட வேண்டும்? | Why be afraid to do evil?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Wed, Sep 9, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-payanila-sollamai.html">
-              பயனில சொல்லாமை - பயனுள்ளதையே பேச வேண்டும் | Speak only what is useful            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Aug 20, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-purankooramai.html">
-              புறங்கூறாமை - புறம் பேசுவதை தவிர்ப்பது எப்படி? | How to Stop Gossiping?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Aug 13, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-alukkaramai.html">
-              அழுக்காறாமை - பொறாமை குணத்தை நீக்குவது எப்படி ? | How to Stop Envying Others?            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Aug 7, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-adakam-udaimai.html">
-              அடக்கம் உடைமை - அதிகாரம் எளிய விளக்கம் | Adakam Udaimai -     Adhigaram Simple Explanation             </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Jul 23, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-naduvu-nilaimai.html">
-              நடுவு நிலைமை - அதிகாரம் எளிய விளக்கம் | Naduvu Nilaimai - Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Jul 16, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-sei-nandri-arithal.html">
-              செய்ந்நன்றியறிதல் - அதிகாரம் எளிய விளக்கம் | Sei Nandri Arithal - Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Jul 9, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-iniyavai-kooral.html">
-              இனியவை கூறல் - அதிகாரம் எளிய விளக்கம் | Iniyavai Kooral -        Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Jul 2, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-virundhompal.html">
-              விருந்தோம்பல் - அதிகாரம் எளிய விளக்கம் | Virundhompal - Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Jun 26, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-anbudaimai.html">
-              அன்புடைமை - அதிகாரம் எளிய விளக்கம் | Anbudaimai - Adhigaram Simple Explanation             </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Jun 18, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-vaazhkkai-thunainalam.html">
-              வாழ்க்கைத் துணைநலம் - அதிகாரம் எளிய விளக்கம் | Vaazhkkai Thunainalam - Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, Jun 11, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-name.html">
-              இல்வாழ்க்கை - அதிகாரம் எளிய விளக்கம் | Ilvaazhkkai - Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Jun 5, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-aran-valiyuruthal.html">
-              அறன் வலியுறுத்தல் - அதிகாரம் எளிய விளக்கம் | Aran Valiyuruthal - Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Thu, May 28, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                      <article class="Article">
-      <h3 class="Article__Title">
-        <a href="thirukkural-adhigaram-kadavul-vazhthu.html">
-              கடவுள் வாழ்த்து - அதிகாரம் எளிய விளக்கம் | Vaazhkkai Thunainalam - Adhigaram Simple Explanation            </a>
-          </h3>
-      <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Sat, May 23, 2020</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  </div>
-    </article>
-                                              <article class="Article">
-      <h3 class="Article__Title">
-        <a href="new-post.html">
-              New Post            </a>
-          </h3>
-      <div class="DateTagBar">
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--purple">
-            <a href="tag/kural.html">kural</a>
-          </span>
-                  </div>
-    </article>
-              </article>
+      {{/if}}
+      {{/each}}
+  </article>
   <footer class="Footer">
-        <div>&copy; கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu 2019</div>
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.

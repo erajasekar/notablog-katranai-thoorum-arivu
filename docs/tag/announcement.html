@@ -9,14 +9,16 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
-  <meta property="og:title" content="#announcement — கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu">
-  <meta name="description" content="All posts tagged with announcement">
-  <meta property="og:description" content="All posts tagged with announcement">
+  <meta property="og:title" content="#{{tagName}} — {{siteMeta.title}}">
+  <meta name="description" content="All posts tagged with {{tagName}}">
+  <meta property="og:description" content="All posts tagged with {{tagName}}">
   <meta property="og:type" content="blog">
-  <title>#announcement — கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu</title>
+  <title>#{{tagName}} — {{siteMeta.title}}</title>
   <!-- Favicon -->
-    <link rel="shortcut icon" href="https://katranaithoorumarivu.com/img/website-logo.png">
-    <base href="../">
+  {{if(options.siteMeta.icon)}}
+  <link rel="shortcut icon" href="{{siteMeta.icon}}">
+  {{/if}}
+  <base href="../">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
@@ -42,53 +44,52 @@
 <body>
   <nav class="Navbar">
     <a href="index.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Home</span></div>
+      <div class="Navbar__Btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
-                                                    <span class="Navbar__Delim">&centerdot;</span>
-    <a href="thirukkural-stories.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span> <span>Thirukkural Stories</span></div>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
+    <span class="Navbar__Delim">&centerdot;</span>
+    <a href="{{@this.url}}">
+      <div class="Navbar__Btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="about.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/kavitha-profile.png"></span> <span>About</span></div>
-    </a>
-                        <span class="Navbar__Delim">&centerdot;</span>
-    <a href="single-thirukkural-explanations.html">
-      <div class="Navbar__Btn"><span><img class="inline-img-icon" src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fed1bd244-a6cc-46d6-a964-1fcc6b2df217%2FKatranai_Thoorum_Logo_(3).png?table=block&id=e233a18e-871a-4c93-81a3-93a56814209f"></span> <span>Single Kurals</span></div>
-    </a>
-                                                                                                                                                                  </nav>
+    {{/if}}
+    {{/each}}
+  </nav>
   <header class="Header">
     <div class="Header__Spacer--NoCover"></div>
-    <h1 class="Header__Title"># announcement</h1>
+    <h1 class="Header__Title"># {{tagName}}</h1>
   </header>
   <article class="ArticleList">
-              <article class="Article">
+    {{each(options.pages)}}
+      {{if(@this.publish && @this.inList)}}
+    <article class="Article">
       <h3 class="Article__Title">
-            <span><img class="inline-img-icon" src="https://katranaithoorumarivu.com/img/website-logo.png"></span>        <a href="thirukkural-irai-maatchi.html">
-              இறைமாட்சி - ஒரு தலைவருக்கு இருக்க வேண்டிய பண்புகள் என்ன | What qualities a leader should have?            </a>
+            {{@this.iconHTML}}
+        <a href="{{@this.url}}">
+              {{@this.title}}
+            </a>
           </h3>
-            <p class="Article__Desc">
-          <span class="SemanticStringArray"><span class="SemanticString">உயர் வாழ்க்கைக்கு திருக்குறள் கற்போம் - அதிகாரம் இறைமாட்சி - குறள்கள் 381 - 390
-Learn Thirrukural for Extraordinary Life - Adhigaram Irai Maatchi</span></span>      </p>
-            <div class="DateTagBar">
-                  <span class="DateTagBar__Item DateTagBar__Date">Posted on Fri, Apr 16, 2021</span>
-                            <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/thirukkural.html">thirukkural</a>
+      {{if(@this.descriptionHTML)}}
+      <p class="Article__Desc">
+          {{@this.descriptionHTML}}
+      </p>
+      {{/if}}
+      <div class="DateTagBar">
+          {{if(@this.date)}}
+        <span class="DateTagBar__Item DateTagBar__Date">Posted on {{@this.dateString}}</span>
+          {{/if}}
+          {{each(@this.tags)}}
+        <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--{{@this.color}}">
+            <a href="tag/{{@this.value}}.html">{{@this.value}}</a>
           </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/arathupal.html">arathupal</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/adhigaram.html">adhigaram</a>
-          </span>
-                  <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--blue">
-            <a href="tag/announcement.html">announcement</a>
-          </span>
-                  </div>
+          {{/each}}
+        </div>
     </article>
-                          </article>
+      {{/if}}
+      {{/each}}
+  </article>
   <footer class="Footer">
-        <div>&copy; கற்றனைத் தூறும் அறிவு | Katranai Thoorum Arivu 2019</div>
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.
